@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tasks_projet_innovation_front/services/notification_services.dart';
@@ -28,17 +30,25 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: _appBar(),
       body: Column(children: [
-        Text("Theme Date", 
-        style: TextStyle(
-          fontSize: 30
-        ))
-      ],)
-      
+        Row(
+          children: [
+            Column(
+              children: [
+                Text(DateTime.now().toString()),
+              ],
+            )
+          ],
+        )
+
+      ],
+      ),
     );
   }
 
   _appBar(){
     return AppBar(
+      elevation: 0,
+      backgroundColor: context.theme.backgroundColor,
       leading: GestureDetector(
         onTap: () {
           ThemeService().switchTheme();
@@ -46,15 +56,19 @@ class _HomePageState extends State<HomePage> {
             title: "Theme Changed",
             body: Get.isDarkMode?"Activated Light Theme":"Activated Dark Theme"
           );
-          notifyHelper.scheduledNotification(); 
         },
-        child: Icon(Icons.nightlight_round,
-        size: 20,),
+        child: Icon( Get.isDarkMode ?Icons.wb_sunny_outlined:Icons.nightlight_round,
+        size: 20,
+          color: Get.isDarkMode ? Colors.white:Colors.black ,
+        ),
       ),
       actions: [
-        Icon(Icons.person,
-        size: 20,),
-        SizedBox(width: 20,),
+        CircleAvatar(
+          backgroundImage: AssetImage(
+            "images/profile.png"
+          ),
+        ),
+        SizedBox(width: 20,)
       ],
 
     );
