@@ -4,8 +4,12 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tasks_projet_innovation_front/controllers/task_controller.dart';
 import 'package:tasks_projet_innovation_front/ui/theme.dart';
+import 'package:tasks_projet_innovation_front/ui/widgets/button.dart';
 import 'package:tasks_projet_innovation_front/ui/widgets/input_field.dart';
+
+import '../models/task.dart';
 
 class AddTaskPage extends StatefulWidget {
   const AddTaskPage({Key? key}) : super(key: key);
@@ -15,6 +19,9 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
+  final TaskController _taskController = Get.put(TaskController());
+  final TextEditingController _titleController= TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
   String _endTime="9:30 PM";
   String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
@@ -32,6 +39,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     "weakly",
     "Monthly"
   ];
+  int _selectedColor = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,8 +54,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 "Add Task",
                 style: headingStyle,
               ),
-              MyInputField(title: "Title", hint: "Enter your title"),
-              MyInputField(title: "Note", hint: "Enter your note"),
+              MyInputField(title: "Title", hint: "Enter your title",controller: _titleController,),
+              MyInputField(title: "Note", hint: "Enter your note",controller: _noteController,),
               MyInputField(title: "Date", hint: DateFormat.yMd().format(_selectedDate),
               widget: IconButton(
                 icon: Icon(Icons.calendar_today_outlined,
@@ -151,37 +159,89 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
 
               ),
-              SizedBox(height: 18,)
+              SizedBox(height: 18,),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text("Color",
-                      style: titleStyle,
-                      ),
-                      SizedBox(height: 8.0,),
-                      Wrap(
-                        children: List<Widget>.generate(
-                            3,
-                                (int index) {
-                                  return Padding(
-                                    padding: const EdgeInsets.only(right: 8.0),
-                                    child: CircleAvatar(
-                                       radius: 14,
-                                      backgroundColor: index==0?primaryClr:inde,
-                                    ),
-                                  );
-                                }),
-                      )
-                    ],
-                  )
+                  _colorPallete(),
+                  MyButton(label: "Create Task", onTap: ()=>_validatedData())
                 ],
               )
             ],
           ),
         ),
       )
+    );
+  }
+  _validatedData(){
+    if(_titleController.text.isNotEmpty&&_noteController.text.isNotEmpty){
+      _addTaskToDb();
+      Get.back();
+    }else if(_titleController.text.isEmpty || _noteController.text.isEmpty){
+      Get.snackbar("Required", "All fields are required!",
+      snackPosition: SnackPosition.BOTTOM,
+      backgroundColor: Colors.white,
+        colorText: pinkClr,
+        icon: Icon(Icons.warning_amber_rounded,
+          color: Colors.red
+        )
+      );
+    }
+  }
+
+  _addTaskToDb() async {
+    int value = await _taskController.addTask(
+        task:Task(
+          note: _noteController.text,
+          title: _titleController.text,
+          date: DateFormat.yMd().format(_selectedDate),
+          startTime: _startTime,
+          endTime: _endTime,
+          remind: _selectedRemind,
+          repeat: _selectedRepeat,
+          color: _selectedColor,
+          isCompleted: 0,
+        )
+    );
+    print("My id is"+ "$value");
+  }
+
+  _colorPallete(){
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Color",
+          style: titleStyle,
+        ),
+        SizedBox(height: 8.0,),
+        Wrap(
+          children: List<Widget>.generate(
+              3,
+                  (int index) {
+                return GestureDetector(
+                  onTap: (){
+                    setState(() {
+                      _selectedColor=index;
+                      print("$index");
+                    });
+
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8.0),
+                    child: CircleAvatar(
+                      radius: 14,
+                      backgroundColor: index==0?primaryClr:index==1?pinkClr:yellowClr,
+                      child: _selectedColor==index?Icon(Icons.done,
+                        color: Colors.white,
+                        size: 16,
+                      ):Container(),
+                    ),
+                  ),
+                );
+              }),
+        )
+      ],
     );
   }
 
