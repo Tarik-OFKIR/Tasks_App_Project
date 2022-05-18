@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
             if(task.repeat=='Daily') {
               DateTime date = DateFormat.jm().parse(task.startTime.toString());
               var myTime = DateFormat("HH:mm").format(date);
-              notifyHelper.scheduleNotification(
+              notifyHelper.scheduledNotification(
                 int.parse(myTime.toString().split(":")[0]),
                 int.parse(myTime.toString().split(":")[1]),
                 task

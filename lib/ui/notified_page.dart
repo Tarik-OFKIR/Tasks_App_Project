@@ -37,6 +37,7 @@ class NotifiedPage extends StatelessWidget {
         ),
           )
     ),
-      );
+      ),
+    );
   }
 }
