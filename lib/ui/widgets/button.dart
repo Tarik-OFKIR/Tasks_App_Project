@@ -18,13 +18,17 @@ class MyButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
           color: primaryClr
         ),
-        child: Text(
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
           label,
           style: TextStyle(
             color: Colors.white,
           ),
-        ),
+          textAlign: TextAlign.center,
 
+        ),
+        ),
       ),
     );
   }

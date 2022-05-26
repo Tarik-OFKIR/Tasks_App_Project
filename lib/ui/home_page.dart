@@ -148,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                 context: context,
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
 
               _bottomSheetButton(
@@ -163,7 +163,7 @@ class _HomePageState extends State<HomePage> {
                 context: context,
               ),
               SizedBox(
-                height: 20,
+                height: 10,
               ),
               _bottomSheetButton(
                 label:"Close",
