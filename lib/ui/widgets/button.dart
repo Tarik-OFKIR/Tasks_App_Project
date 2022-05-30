@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tasks_projet_innovation_front/ui/theme.dart';
+import 'package:tasks_projet_innovation_front/Themes/them.dart';
 
 class MyButton extends StatelessWidget {
   final String label;
@@ -16,14 +16,14 @@ class MyButton extends StatelessWidget {
         height: 60,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
-          color: primaryClr
+          color: Theme.of(context).colorScheme.tertiary,
         ),
         child: Align(
           alignment: Alignment.center,
           child: Text(
           label,
-          style: TextStyle(
-            color: Colors.white,
+          style:  TextStyle(
+            color: Theme.of(context).colorScheme.primary ,
           ),
           textAlign: TextAlign.center,
 

@@ -9,17 +9,17 @@ class TaskController extends GetxController{
     super.onReady();
   }
 
-  var taskList = <Task>[].obs;
+  var taskList = <TaskModel>[].obs;
 
-  Future<int> addTask({Task? task}) async{
+  Future<int> addTask({TaskModel? task}) async{
     return await DBHelper.insert(task);
   }
 
   void getTasks() async{
     List<Map<String, dynamic>> tasks= await DBHelper.query();
-    taskList.assignAll(tasks.map((data) => new Task.fromJson(data)).toList());
+    taskList.assignAll(tasks.map((data) => new TaskModel.fromJson(data)).toList());
   }
-  void delete(Task task){
+  void delete(TaskModel task){
     DBHelper.delete(task);
     getTasks();
   }

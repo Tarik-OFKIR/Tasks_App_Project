@@ -1,4 +1,4 @@
-class Task{
+class TaskModel{
   int? id;
   String? title;
   String? note;
@@ -10,10 +10,10 @@ class Task{
   int? remind;
   String? repeat;
 
-  Task({this.id, this.title, this.note, this.isCompleted, this.date,
+  TaskModel({this.id, this.title, this.note, this.isCompleted, this.date,
       this.startTime, this.endTime, this.color, this.remind, this.repeat});
 
-  Task.fromJson(Map<String, dynamic> json){
+  TaskModel.fromJson(Map<String, dynamic> json){
     id=json['id'];
     title=json['title'];
     note=json['note'];

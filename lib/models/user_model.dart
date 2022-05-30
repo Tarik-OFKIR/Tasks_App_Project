@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 class UserModel {
   int id;
   String name;
@@ -22,6 +24,8 @@ class UserModel {
     required this.albumCount,
     required this.postCount,
   });
+
+
 
   UserModel.fromJson(Map<String, dynamic> json, this.albumCount, this.postCount)
       : id = json['id'] as int,

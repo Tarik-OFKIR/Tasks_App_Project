@@ -1,11 +1,8 @@
-
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:tasks_projet_innovation_front/controllers/task_controller.dart';
-import 'package:tasks_projet_innovation_front/ui/theme.dart';
+import 'package:tasks_projet_innovation_front/Themes/them.dart';
 import 'package:tasks_projet_innovation_front/ui/widgets/button.dart';
 import 'package:tasks_projet_innovation_front/ui/widgets/input_field.dart';
 
@@ -43,7 +40,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       appBar: _appBar(context),
       body:Container(
         padding: const EdgeInsets.only(left:20, right: 20),
@@ -58,11 +55,10 @@ class _AddTaskPageState extends State<AddTaskPage> {
               MyInputField(title: "Note", hint: "Enter your note",controller: _noteController,),
               MyInputField(title: "Date", hint: DateFormat.yMd().format(_selectedDate),
               widget: IconButton(
-                icon: Icon(Icons.calendar_today_outlined,
-                color: Colors.grey,
+                icon:  Icon(Icons.calendar_today_outlined,
+                color:Theme.of(context).colorScheme.secondary,
                 ),
                 onPressed: () {
-                  print("Hi there");
                   _getDateFromUser();
                 },
 
@@ -78,14 +74,14 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           onPressed: () {
                             _getTimeFromUser(isStartTime: true);
                           },
-                          icon: Icon(
+                          icon:  Icon(
                             Icons.access_time_rounded,
-                            color:Colors.grey,
+                            color:Theme.of(context).colorScheme.secondary,
                           ),
 
                         ),
                   )),
-                  SizedBox(width: 12,),
+                  const SizedBox(width: 12,),
                   Expanded(
                       child: MyInputField(
                         title: "End Date",
@@ -94,9 +90,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           onPressed: () {
                             _getTimeFromUser(isStartTime: false);
                           },
-                          icon: Icon(
+                          icon:  Icon(
                             Icons.access_time_rounded,
-                            color:Colors.grey,
+                            color:Theme.of(context).colorScheme.secondary,
                           ),
 
                         ),
@@ -105,8 +101,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
               ),
               MyInputField(title: "Remind", hint: "$_selectedRemind minutes early",
               widget:DropdownButton(
-                icon: Icon(Icons.keyboard_arrow_down,
-                color: Colors.grey,
+                icon:  Icon(Icons.keyboard_arrow_down,
+                color: Theme.of(context).colorScheme.secondary,
               ),
               iconSize: 32,
               elevation: 4,
@@ -116,7 +112,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
               items: remindList.map<DropdownMenuItem<String>>((int value){
                 return DropdownMenuItem<String>(
                     value: value.toString(),
-                    child: Text(value.toString()),
+                    child: Text(value.toString(), style: TextStyle(color:Theme.of(context).colorScheme.secondary)),
+
                 );
                 }
               ).toList(),
@@ -133,8 +130,8 @@ class _AddTaskPageState extends State<AddTaskPage> {
               ),
               MyInputField(title: "Repeat", hint: "$_selectedRepeat ",
                   widget:DropdownButton(
-                    icon: Icon(Icons.keyboard_arrow_down,
-                      color: Colors.grey,
+                    icon:  Icon(Icons.keyboard_arrow_down,
+                      color: Theme.of(context).colorScheme.secondary,
                     ),
                     iconSize: 32,
                     elevation: 4,
@@ -144,7 +141,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     items: repeatList.map<DropdownMenuItem<String>>((String? value){
                       return DropdownMenuItem<String>(
                         value: value,
-                        child: Text(value!, style: TextStyle(color:Colors.grey)),
+                        child: Text(value!, style:  TextStyle(color:Theme.of(context).colorScheme.secondary)),
                       );
                     }
                     ).toList(),
@@ -159,7 +156,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
 
               ),
-              SizedBox(height: 18,),
+              const SizedBox(height: 18,),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -181,9 +178,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
     }else if(_titleController.text.isEmpty || _noteController.text.isEmpty){
       Get.snackbar("Required", "All fields are required!",
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.white,
-        colorText: pinkClr,
-        icon: Icon(Icons.warning_amber_rounded,
+      backgroundColor: Theme.of(context).colorScheme.secondary,
+        colorText: Theme.of(context).colorScheme.primary,
+        icon: const Icon(Icons.warning_amber_rounded,
           color: Colors.red
         )
       );
@@ -192,7 +189,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
 
   _addTaskToDb() async {
     int value = await _taskController.addTask(
-        task:Task(
+        task:TaskModel(
           note: _noteController.text,
           title: _titleController.text,
           date: DateFormat.yMd().format(_selectedDate),
@@ -204,7 +201,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
           isCompleted: 0,
         )
     );
-    print("My id is"+ "$value");
   }
 
   _colorPallete(){
@@ -214,7 +210,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         Text("Color",
           style: titleStyle,
         ),
-        SizedBox(height: 8.0,),
+        const SizedBox(height: 8.0,),
         Wrap(
           children: List<Widget>.generate(
               3,
@@ -231,9 +227,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     padding: const EdgeInsets.only(right: 8.0),
                     child: CircleAvatar(
                       radius: 14,
-                      backgroundColor: index==0?primaryClr:index==1?pinkClr:yellowClr,
-                      child: _selectedColor==index?Icon(Icons .done,
-                        color: Colors.white,
+                      backgroundColor: index==0?bluishClr:index==1?yellowClr:pinkClr,
+                      child: _selectedColor==index? Icon(Icons .done,
+                        color: Theme.of(context).colorScheme.secondary,
                         size: 16,
                       ):Container(),
                     ),
@@ -248,24 +244,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
   _appBar(BuildContext context){
     return AppBar(
       elevation: 0,
-      backgroundColor: context.theme.backgroundColor,
+      backgroundColor: Theme.of(context).colorScheme.background,
       leading: GestureDetector(
         onTap: () {
           Get.back();
         },
-        child: Icon( Icons.arrow_back_ios,
+        child:  Icon( Icons.arrow_back_ios,
           size: 20,
-          color: Get.isDarkMode ? Colors.white:Colors.black ,
+          color: Theme.of(context).colorScheme.secondary,
         ),
       ),
-      actions: [
-        CircleAvatar(
-          backgroundImage: AssetImage(
-              "images/profile.png"
-          ),
-        ),
-        SizedBox(width: 20,)
-      ],
+
 
     );
   }
@@ -280,12 +269,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
     if(_pickerDate!=null){
       setState(() {
         _selectedDate = _pickerDate;
-        print(_selectedDate);
       });
     }else{
       print("it's null or something is wrong");
     }
   }
+
   _getTimeFromUser({required bool isStartTime}) async{
     var pickedTime = await _showTimePicked();
     String _formatedTime = pickedTime.format(context);
@@ -303,6 +292,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     }
 
   }
+
   _showTimePicked(){
     return showTimePicker(
       initialEntryMode: TimePickerEntryMode.input,
