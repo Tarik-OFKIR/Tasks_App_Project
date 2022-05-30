@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tasks_projet_innovation_front/ui/theme.dart';
+import 'package:tasks_projet_innovation_front/Themes/them.dart';
 import 'package:get/get.dart';
 
 class MyInputField extends StatelessWidget {
@@ -29,11 +29,11 @@ class MyInputField extends StatelessWidget {
           ),
           Container(
             height: 52,
-              margin: EdgeInsets.only(top: 8.0),
-              padding: EdgeInsets.only(left: 14),
+              margin: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(left: 14),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.grey,
+                  color: Theme.of(context).colorScheme.secondary,
                   width: 1.0
                 ),
                 borderRadius: BorderRadius.circular(12)
@@ -44,7 +44,7 @@ class MyInputField extends StatelessWidget {
                 child: TextFormField(
                   readOnly: widget==null?false:true,
                   autofocus: false,
-                  cursorColor: Get.isDarkMode?Colors.grey[100]:Colors.grey[700] ,
+                  cursorColor: Colors.white,
                   controller: controller,
                   style: subTitleStyle,
                   decoration: InputDecoration(
@@ -52,13 +52,13 @@ class MyInputField extends StatelessWidget {
                     hintStyle: subTitleStyle,
                     focusedBorder: UnderlineInputBorder(
                       borderSide: BorderSide(
-                        color: context.theme.backgroundColor,
+                        color: Theme.of(context).colorScheme.primary,
                         width: 0
                       )
                     ),
                     enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(
-                            color: context.theme.backgroundColor,
+                            color: Theme.of(context).colorScheme.primary,
                             width: 0
                         )
                     ),

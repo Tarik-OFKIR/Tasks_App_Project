@@ -60,7 +60,7 @@ class NotifyHelper {
       payload: title,
     );
   }
-  scheduledNotification(int hour, int minute, Task task) async {
+  scheduledNotification(int hour, int minute, TaskModel task) async {
 
      await flutterLocalNotificationsPlugin.zonedSchedule(
          task.id!.toInt(),

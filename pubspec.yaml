@@ -37,6 +37,9 @@ dependencies:
   get_storage:
   get:
   intl:
+  http: ^0.13.4
+  provider: ^6.0.2
+  flutter_screenutil: ^5.5.3
   google_fonts:
   date_picker_timeline:
   flutter_local_notifications: ^9.5.2
