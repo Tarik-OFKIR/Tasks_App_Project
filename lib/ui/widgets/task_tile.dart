@@ -92,13 +92,13 @@ class TaskTile extends StatelessWidget {
   _getBGClr(int no) {
     switch (no) {
       case 0:
-        return const Color(0xff3b44b0);
+        return const Color(0xff75facd);
       case 1:
-        return const Color(0xffcebd2b);
+        return const Color(0xffe4fa75);
       case 2:
-        return const Color(0xffc22541);
+        return const Color(0xfffa75a2);
       default:
-        return const Color(0xffc22541);
+        return const Color(0xfffa75a2);
     }
   }
 }

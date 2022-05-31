@@ -210,11 +210,8 @@ class _HomePageState extends State<HomePage> {
         decoration: BoxDecoration(
           border: Border.all(
               width: 2,
-              color: isClose == true
-                  ? Get.isDarkMode
-                      ? Colors.grey[600]!
-                      : Colors.grey[300]!
-                  : clr),
+              color: Colors.grey[600]!,
+                      ),
           borderRadius: BorderRadius.circular(20),
           color: isClose == true ? Colors.transparent : clr,
         ),
@@ -239,8 +236,8 @@ class _HomePageState extends State<HomePage> {
         height: 100,
         width: 80,
         initialSelectedDate: DateTime.now(),
-        selectionColor: Theme.of(context).colorScheme.secondary,
-        selectedTextColor: Theme.of(context).colorScheme.secondary,
+        selectionColor: Theme.of(context).colorScheme.tertiary,
+        selectedTextColor: Theme.of(context).colorScheme.background,
         dateTextStyle: GoogleFonts.lato(
             textStyle: TextStyle(
                 fontSize: 20,

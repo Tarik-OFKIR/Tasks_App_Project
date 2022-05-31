@@ -56,7 +56,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               MyInputField(title: "Date", hint: DateFormat.yMd().format(_selectedDate),
               widget: IconButton(
                 icon:  Icon(Icons.calendar_today_outlined,
-                color:Theme.of(context).colorScheme.secondary,
+                color:Theme.of(context).colorScheme.tertiary,
                 ),
                 onPressed: () {
                   _getDateFromUser();
@@ -76,7 +76,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           },
                           icon:  Icon(
                             Icons.access_time_rounded,
-                            color:Theme.of(context).colorScheme.secondary,
+                            color:Theme.of(context).colorScheme.tertiary,
                           ),
 
                         ),
@@ -92,7 +92,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                           },
                           icon:  Icon(
                             Icons.access_time_rounded,
-                            color:Theme.of(context).colorScheme.secondary,
+                            color:Theme.of(context).colorScheme.tertiary,
                           ),
 
                         ),
@@ -102,7 +102,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               MyInputField(title: "Remind", hint: "$_selectedRemind minutes early",
               widget:DropdownButton(
                 icon:  Icon(Icons.keyboard_arrow_down,
-                color: Theme.of(context).colorScheme.secondary,
+                color: Theme.of(context).colorScheme.tertiary,
               ),
               iconSize: 32,
               elevation: 4,
@@ -131,7 +131,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
               MyInputField(title: "Repeat", hint: "$_selectedRepeat ",
                   widget:DropdownButton(
                     icon:  Icon(Icons.keyboard_arrow_down,
-                      color: Theme.of(context).colorScheme.secondary,
+                      color: Theme.of(context).colorScheme.tertiary,
                     ),
                     iconSize: 32,
                     elevation: 4,

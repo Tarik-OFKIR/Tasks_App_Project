@@ -23,7 +23,7 @@ class MyButton extends StatelessWidget {
           child: Text(
           label,
           style:  TextStyle(
-            color: Theme.of(context).colorScheme.primary ,
+            color: Theme.of(context).colorScheme.background ,
           ),
           textAlign: TextAlign.center,
 

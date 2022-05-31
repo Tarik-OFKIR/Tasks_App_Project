@@ -33,7 +33,7 @@ class MyInputField extends StatelessWidget {
               padding: const EdgeInsets.only(left: 14),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.secondary,
+                  color: Theme.of(context).colorScheme.tertiary,
                   width: 1.0
                 ),
                 borderRadius: BorderRadius.circular(12)
